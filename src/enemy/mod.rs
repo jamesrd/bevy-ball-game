@@ -3,6 +3,7 @@ pub mod resources;
 mod systems;
 
 use bevy::app::Plugin;
+use bevy::prelude::*;
 use resources::*;
 use systems::*;
 
@@ -17,7 +18,7 @@ impl Plugin for EnemyPlugin {
         app.init_resource::<EnemySpawnTimer>()
             .add_startup_system(spawn_enemies)
             .add_system(enemy_movement)
-            .add_system(update_enemy_direction)
+            .add_system(update_enemy_direction.after(enemy_movement))
             .add_system(tick_enemy_spawn_timer)
             .add_system(spawn_enemies_over_time);
     }
