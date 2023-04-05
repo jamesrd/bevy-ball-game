@@ -1,13 +1,13 @@
 use bevy::{prelude::*, window::PrimaryWindow};
 
 use super::components::*;
+use super::{PLAYER_SIZE, PLAYER_SPEED};
 use crate::events::GameOver;
 use crate::game::enemy::components::Enemy;
 use crate::game::enemy::ENEMY_SIZE;
 use crate::game::score::resources::Score;
 use crate::game::star::components::Star;
 use crate::game::star::STAR_SIZE;
-use super::{PLAYER_SIZE, PLAYER_SPEED};
 
 pub fn spawn_player(
     mut commands: Commands,
@@ -24,6 +24,12 @@ pub fn spawn_player(
         },
         Player {},
     ));
+}
+
+pub fn despawn_player(mut commands: Commands, player_query: Query<Entity, With<Player>>) {
+    if let Ok(player_entity) = player_query.get_single() {
+        commands.entity(player_entity).despawn();
+    }
 }
 
 pub fn player_movement(

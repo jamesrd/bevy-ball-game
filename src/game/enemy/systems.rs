@@ -1,6 +1,6 @@
-use super::{ENEMY_SIZE, ENEMY_SPEED, NUMBER_OF_ENEMIES};
 use super::components::*;
 use super::resources::*;
+use super::{ENEMY_SIZE, ENEMY_SPEED, NUMBER_OF_ENEMIES};
 use bevy::{prelude::*, window::PrimaryWindow};
 use rand::prelude::*;
 
@@ -25,6 +25,12 @@ pub fn spawn_enemies(
                 direction: Vec2::new(random::<f32>(), random::<f32>()).normalize(),
             },
         ));
+    }
+}
+
+pub fn despawn_enemies(mut commands: Commands, enemy_query: Query<Entity, With<Enemy>>) {
+    for enemy in enemy_query.iter() {
+        commands.entity(enemy).despawn();
     }
 }
 
