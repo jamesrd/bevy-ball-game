@@ -3,6 +3,7 @@ pub mod player;
 pub mod score;
 pub mod star;
 pub mod systems;
+pub mod ui;
 
 use bevy::prelude::*;
 
@@ -12,6 +13,8 @@ use player::PlayerPlugin;
 use score::ScorePlugin;
 use star::StarPlugin;
 use systems::*;
+
+use self::ui::GameUiPlugin;
 
 pub struct GamePlugin;
 
@@ -27,6 +30,7 @@ impl Plugin for GamePlugin {
             .add_plugin(PlayerPlugin)
             .add_plugin(ScorePlugin)
             .add_plugin(StarPlugin)
+            .add_plugin(GameUiPlugin)
             // Systems
             .add_system(toggle_simulation.run_if(in_state(AppState::Game)))
             // On Exit Systems
