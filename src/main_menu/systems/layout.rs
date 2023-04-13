@@ -2,11 +2,14 @@ use bevy::prelude::*;
 
 use crate::main_menu::{
     components::{MainMenu, PlayButton, QuitButton},
-    styles::{get_bold_text_style, BUTTON_STYLE, IMAGE_STYLE, NORMAL_BUTTON_COLOR, TITLE_STYLE, MAIN_MENU_STYLE},
+    styles::{
+        get_bold_text_style, BUTTON_STYLE, IMAGE_STYLE, MAIN_MENU_STYLE, NORMAL_BUTTON_COLOR,
+        TITLE_STYLE,
+    },
 };
 
 pub fn spawn_main_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let main_menu_entity = build_main_menu(&mut commands, &asset_server);
+    build_main_menu(&mut commands, &asset_server);
 }
 
 pub fn despawn_main_menu(mut commands: Commands, main_menu_query: Query<Entity, With<MainMenu>>) {
@@ -15,8 +18,8 @@ pub fn despawn_main_menu(mut commands: Commands, main_menu_query: Query<Entity, 
     }
 }
 
-pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>) -> Entity {
-    let main_menu_entity = commands
+pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>) {
+    commands
         .spawn((
             NodeBundle {
                 style: MAIN_MENU_STYLE,
@@ -103,8 +106,5 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
                         ..default()
                     });
                 });
-        })
-        .id();
-
-    return main_menu_entity;
+        });
 }
