@@ -1,6 +1,8 @@
 use bevy::prelude::*;
 
-use super::styles::PAUSE_MENU_STYLE;
+use self::styles::PAUSE_MENU_STYLE;
+
+mod styles;
 
 #[derive(Component)]
 pub struct PauseMenu {}

@@ -1,5 +1,4 @@
 mod pause_menu;
-mod styles;
 
 use bevy::prelude::*;
 
