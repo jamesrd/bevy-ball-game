@@ -17,7 +17,7 @@ pub fn transition_to_game_state(
     keyboard_input: Res<Input<KeyCode>>,
     app_state: Res<State<AppState>>,
 ) {
-    if app_state.0 != AppState::Game && keyboard_input.just_pressed(KeyCode::G) {
+    if *app_state.get() != AppState::Game && keyboard_input.just_pressed(KeyCode::G) {
         next_app_state.set(AppState::Game);
         next_simulation_state.set(SimulationState::Paused);
         println!("Entered state Game");
@@ -30,7 +30,7 @@ pub fn transition_to_main_menu_state(
     keyboard_input: Res<Input<KeyCode>>,
     app_state: Res<State<AppState>>,
 ) {
-    if app_state.0 != AppState::MainMenu && keyboard_input.just_pressed(KeyCode::M) {
+    if *app_state.get() != AppState::MainMenu && keyboard_input.just_pressed(KeyCode::M) {
         next_app_state.set(AppState::MainMenu);
         next_simulation_state.set(SimulationState::Paused);
         println!("Entered state Main Menu");

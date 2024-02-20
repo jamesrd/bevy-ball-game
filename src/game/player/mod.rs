@@ -22,21 +22,21 @@ pub struct PlayerPlugin;
 
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.configure_set(MovementSystemSet.before(ConfinementSystemSet))
+        app.configure_set(Update, MovementSystemSet.before(ConfinementSystemSet))
             // Enter State Systems
-            .add_system(spawn_player.in_schedule(OnEnter(AppState::Game)))
+            .add_systems(OnEnter(AppState::Game), spawn_player)
             // Systems
-            .add_systems(
+            .add_systems(Update,
                 (
                     player_movement.in_set(MovementSystemSet),
                     confine_player_movement.in_set(ConfinementSystemSet),
                     enemy_hit_player,
                     player_hit_star,
                 )
-                    .in_set(OnUpdate(AppState::Game))
-                    .in_set(OnUpdate(SimulationState::Running)),
+                    .run_if(in_state(AppState::Game))
+                    .run_if(in_state(SimulationState::Running)),
             )
             // Exit State Systems
-            .add_system(despawn_player.in_schedule(OnExit(AppState::Game)));
+            .add_systems(OnExit(AppState::Game), despawn_player);
     }
 }

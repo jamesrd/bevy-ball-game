@@ -14,12 +14,12 @@ impl Plugin for ScorePlugin {
         app.init_resource::<Score>()
             .init_resource::<HighScores>()
             // Enter State Systems
-            .add_system(insert_score.in_schedule(OnEnter(AppState::Game)))
+            .add_systems(OnEnter(AppState::Game),insert_score)
             // Systems
-            .add_system(update_score.run_if(in_state(AppState::Game)))
-            .add_system(update_high_scores)
-            .add_system(high_scores_updates)
+            .add_systems(Update, update_score.run_if(in_state(AppState::Game)))
+            .add_systems(Update, update_high_scores)
+            .add_systems(Update, high_scores_updates)
             // Exit State systems
-            .add_system(remove_score.in_schedule(OnExit(AppState::Game)));
+            .add_systems(OnExit(AppState::Game), remove_score);
     }
 }
