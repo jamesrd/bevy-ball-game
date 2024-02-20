@@ -20,19 +20,19 @@ impl Plugin for EnemyPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.init_resource::<EnemySpawnTimer>()
             // Enter State systems
-            .add_system(spawn_enemies.in_schedule(OnEnter(AppState::Game)))
+            .add_systems(OnEnter(AppState::Game), spawn_enemies)
             // Systems
-            .add_systems(
+            .add_systems(Update,
                 (
                     enemy_movement,
                     update_enemy_direction,
                     tick_enemy_spawn_timer,
                     spawn_enemies_over_time,
                 )
-                    .in_set(OnUpdate(AppState::Game))
-                    .in_set(OnUpdate(SimulationState::Running)),
+                    .run_if(in_state(AppState::Game))
+                    .run_if(in_state(SimulationState::Running)),
             )
             // Exit State Systems
-            .add_system(despawn_enemies.in_schedule(OnExit(AppState::Game)));
+            .add_systems(OnExit(AppState::Game), despawn_enemies);
     }
 }

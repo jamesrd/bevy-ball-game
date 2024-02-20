@@ -44,8 +44,8 @@ pub fn enemy_movement(mut enemy_query: Query<(&mut Transform, &Enemy)>, time: Re
 pub fn update_enemy_direction(
     mut enemy_query: Query<(&mut Transform, &mut Enemy)>,
     window_query: Query<&Window, With<PrimaryWindow>>,
-    audio: Res<Audio>,
     asset_server: Res<AssetServer>,
+    mut commands: Commands,
 ) {
     let window = window_query.get_single().unwrap();
 
@@ -85,7 +85,10 @@ pub fn update_enemy_direction(
                 asset_server.load("audio/pluck_002.ogg")
             };
 
-            audio.play(sound_effect);
+            commands.spawn(AudioBundle {
+                source: sound_effect,
+                settings: PlaybackSettings::ONCE,
+            });
         }
     }
 }
