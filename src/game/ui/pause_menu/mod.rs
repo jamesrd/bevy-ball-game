@@ -27,7 +27,7 @@ pub fn spawn_pause_menu(mut commands: Commands, asset_server: Res<AssetServer>) 
                             color: Color::WHITE,
                         },
                     )],
-                    alignment: TextAlignment::Center,
+                    justify: JustifyText::Center,
                     ..default()
                 },
                 ..default()

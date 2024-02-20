@@ -14,10 +14,10 @@ pub fn spawn_camera(mut commands: Commands, window_query: Query<&Window, With<Pr
 pub fn transition_to_game_state(
     mut next_app_state: ResMut<NextState<AppState>>,
     mut next_simulation_state: ResMut<NextState<SimulationState>>,
-    keyboard_input: Res<Input<KeyCode>>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
     app_state: Res<State<AppState>>,
 ) {
-    if *app_state.get() != AppState::Game && keyboard_input.just_pressed(KeyCode::G) {
+    if *app_state.get() != AppState::Game && keyboard_input.just_pressed(KeyCode::KeyG) {
         next_app_state.set(AppState::Game);
         next_simulation_state.set(SimulationState::Paused);
         println!("Entered state Game");
@@ -27,10 +27,10 @@ pub fn transition_to_game_state(
 pub fn transition_to_main_menu_state(
     mut next_app_state: ResMut<NextState<AppState>>,
     mut next_simulation_state: ResMut<NextState<SimulationState>>,
-    keyboard_input: Res<Input<KeyCode>>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
     app_state: Res<State<AppState>>,
 ) {
-    if *app_state.get() != AppState::MainMenu && keyboard_input.just_pressed(KeyCode::M) {
+    if *app_state.get() != AppState::MainMenu && keyboard_input.just_pressed(KeyCode::KeyM) {
         next_app_state.set(AppState::MainMenu);
         next_simulation_state.set(SimulationState::Paused);
         println!("Entered state Main Menu");
@@ -38,7 +38,7 @@ pub fn transition_to_main_menu_state(
 }
 
 pub fn exit_game(
-    keyboard_input: Res<Input<KeyCode>>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
     mut app_exit_event_writer: EventWriter<AppExit>,
 ) {
     if keyboard_input.just_pressed(KeyCode::Escape) {
