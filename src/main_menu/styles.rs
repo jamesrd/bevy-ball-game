@@ -25,7 +25,7 @@ pub const TITLE_STYLE: Style = {
     style.flex_direction = FlexDirection::Row;
     style.justify_content = JustifyContent::Center;
     style.align_items = AlignItems::Center;
-    style.width = Val::Px(300.0);
+    //style.width = Val::Px(300.0);
     style.height = Val::Px(120.0);
     style
 };
