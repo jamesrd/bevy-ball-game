@@ -50,7 +50,7 @@ pub fn handle_game_over(
     mut next_state: ResMut<NextState<AppState>>,
     mut game_over_event_reader: EventReader<GameOver>,
 ) {
-    for event in game_over_event_reader.iter() {
+    for event in game_over_event_reader.read() {
         println!("Game Over! Score: {0}", event.score.to_string());
         next_state.set(AppState::GameOver);
     }
