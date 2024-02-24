@@ -12,7 +12,7 @@ pub fn resume_simulation(mut next_simulation_state: ResMut<NextState<SimulationS
 
 pub fn toggle_simulation(
     mut next_state: ResMut<NextState<SimulationState>>,
-    keyboard_input: Res<Input<KeyCode>>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
     simulation_state: Res<State<SimulationState>>,
 ) {
     if keyboard_input.just_pressed(KeyCode::Space){

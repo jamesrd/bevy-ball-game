@@ -27,7 +27,7 @@ pub fn spawn_game_over_menu(mut commands: Commands, asset_server: Res<AssetServe
                                 "Game Over!",
                                 get_bold_text_style(64.0, &asset_server),
                             )],
-                            alignment: TextAlignment::Center,
+                            justify: JustifyText::Center,
                             ..default()
                         },
                         ..default()
@@ -51,7 +51,7 @@ pub fn spawn_game_over_menu(mut commands: Commands, asset_server: Res<AssetServe
                                 "New Game",
                                 get_bold_text_style(32.0, &asset_server),
                             )],
-                            alignment: TextAlignment::Center,
+                            justify: JustifyText::Center,
                             ..default()
                         },
                         ..default()
@@ -74,7 +74,7 @@ pub fn spawn_game_over_menu(mut commands: Commands, asset_server: Res<AssetServe
                                 "Main Menu",
                                 get_bold_text_style(32.0, &asset_server),
                             )],
-                            alignment: TextAlignment::Center,
+                            justify: JustifyText::Center,
                             ..default()
                         },
                         ..default()

@@ -20,7 +20,7 @@ pub struct GamePlugin;
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.add_state::<SimulationState>()
+        app.init_state::<SimulationState>()
             // Events
             .add_event::<GameOver>()
             // On Enter Systems

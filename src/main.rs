@@ -11,7 +11,7 @@ use main_menu::MainMenuPlugin;
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_state::<AppState>()
+        .init_state::<AppState>()
         .add_systems(Startup, spawn_camera)
         .add_systems(Update, handle_game_over)
         .add_systems(Update, exit_game)
